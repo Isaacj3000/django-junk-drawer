@@ -1,6 +1,6 @@
 # Getting Started
 ### Clone repo to your local machine
-    git clone github-repo-url
+    git clone https://github.com/Cpreza24/django-junk-drawer.git
 
 ### Install Django 
     pipenv install django
