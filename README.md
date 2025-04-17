@@ -27,16 +27,6 @@ refer to .env.example for variable values
 ### Create a branch to start working on your sections
     git checkout -b branch_name
 
-# Database Configuration
-# 1. Create your database first: createdb junkdrawer
-# 2. Replace user, password, and secret key with your own values
-# Note: Never use these example values in production!
-
-DB_NAME=junkdrawer
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_HOST=localhost
-DB_PORT=5432
 
 # Django Configuration
 SECRET_KEY=your-django-secret-key
