@@ -2,8 +2,8 @@
 ### Clone repo to your local machine
     git clone https://github.com/Cpreza24/django-junk-drawer.git
 
-### Install Dependancies
-    pipenv install 
+### Install Django
+    pipenv install django
 wait for terminal to show 
 -> django-junk-drawer git (main) then run: (enters virtual enviornment)
     
