@@ -20,9 +20,9 @@ wait for terminal to show
 refer to .env.example for variable values 
 
 ### In IDE Terminal run:
-    createbd junkdrawer 
-    python3 manage.py migrate
-    python3 manage.py runserver
+    1. createdb junkdrawer 
+    2. python3 manage.py migrate
+    3. python3 manage.py runserver
 
 ### Create a branch to start working on your sections
     git checkout -b branch_name
