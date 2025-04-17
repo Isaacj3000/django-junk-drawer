@@ -33,7 +33,9 @@ In the terminal run
     2. \dt 
 
 Displays the tables created by Django 
+
 q returns you to Postgres shell
+
 exit or \q quits the Postgres CLI 
 
 
