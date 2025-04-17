@@ -27,8 +27,3 @@ refer to .env.example for variable values
 ### Create a branch to start working on your sections
     git checkout -b branch_name
 
-
-# Django Configuration
-SECRET_KEY=your-django-secret-key
-
-    
