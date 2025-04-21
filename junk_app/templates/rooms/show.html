@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h1>{{ room.name }}</h1>
+
+    <div class="actions">
+      <a href="{% url 'rooms_edit' room.id %}" class="btn btn-warning">Edit</a>
+
+      <form action="{% url 'rooms_delete' room.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+
+    <hr />
+
+    <h2>Items in this Room:</h2>
+    <ul>
+      {% for item in room.items.all %}
+        <li>{{ item.name }}</li>
+      {% empty %}
+        <li>No items yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

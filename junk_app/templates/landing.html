@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h1>Welcome to the Junk Drawer App</h1>
+    <p>Keep your home organized by creating rooms and tracking the random stuff in each one.</p>
+
+    <div class="actions">
+      <a href="{% url 'rooms_index' %}" class="btn btn-primary">View My Rooms</a>
+      <a href="{% url 'rooms_new' %}" class="btn btn-secondary">Add a New Room</a>
+    </div>
+  </div>
+{% endblock %}

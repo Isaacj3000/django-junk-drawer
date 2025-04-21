@@ -1,0 +1,51 @@
+body {
+    font-family: sans-serif;
+    margin: 40px;
+    background: #f8f8f8;
+  }
+  
+  .container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .btn-primary {
+    background: #007bff;
+  }
+  
+  .btn-warning {
+    background: #ffc107;
+  }
+  
+  .btn-danger {
+    background: #dc3545;
+  }
+  
+  .btn-secondary {
+    background: #6c757d;
+  }
+  
+  nav {
+    background-color: #f0f0f0;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  nav a {
+    margin-right: 10px;
+    text-decoration: none;
+  }
