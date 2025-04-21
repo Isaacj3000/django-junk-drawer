@@ -1,15 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        {% block content %}
-        {% endblock %}
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Junk Drawer App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'rooms_index' %}">Rooms</a> |
+      <a href="{% url 'rooms_new' %}">Add Room</a> |
+      {% if user.is_authenticated %}
+        Logged in as {{ user.username }} |
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </nav>
+    <hr>
+    
+    {% block content %}
+    {% endblock %}
+  </body>
 </html>

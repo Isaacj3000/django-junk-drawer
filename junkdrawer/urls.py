@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('junk_app.urls')), #mounts the main_app urls at the root
+    path('', include('junk_app.urls')),  # Mounts your app's URLs
+    path('accounts/', include('django.contrib.auth.urls')),  # 🔑 Adds built-in login/logout routes
 ]

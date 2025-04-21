@@ -32,5 +32,3 @@ items = [
 
 def home(request):
     return HttpResponse("migrations worked! Server is running");
-
-
