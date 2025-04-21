@@ -31,8 +31,6 @@ items = [
     Item('Marker', 'Kitchen', False),
 ]
 
-
-
 def home(request):
     return HttpResponse("migrations worked! Server is running");
 
