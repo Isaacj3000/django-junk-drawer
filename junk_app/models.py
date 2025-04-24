@@ -19,6 +19,18 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
+class Item(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    quantity = models.IntegerField(default=1)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
 # Signal to create/update UserProfile when User is created/updated
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

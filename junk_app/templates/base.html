@@ -1,33 +1,57 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Junk Drawer App</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Junk Drawer - Organize your items by rooms">
+    <title>{% block title %}Junk Drawer{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block head %}{% endblock %}
   </head>
   <body>
-    <nav>
-      {% if user.is_authenticated %}
-        <a href="{% url 'rooms_index' %}">Rooms</a> |
-        <a href="{% url 'rooms_new' %}">Add Room</a> |
-        <a href="{% url 'profile' %}">Profile</a> |
-        Logged in as {{ user.username }} |
-        <form method="post" action="{% url 'logout' %}" style="display: inline;">
-          {% csrf_token %}
-          <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;">Logout</button>
-        </form>
-      {% else %}
-        <a href="{% url 'login' %}">Login</a> |
-        <a href="{% url 'signup' %}">Sign Up</a>
+    <header>
+      <nav class="main-nav">
+        <div class="nav-brand">
+          <a href="{% url 'home' %}">Junk Drawer</a>
+        </div>
+        <div class="nav-links">
+          {% if user.is_authenticated %}
+            <a href="{% url 'rooms_index' %}" class="nav-link">Rooms</a>
+            <a href="{% url 'rooms_new' %}" class="nav-link">Add Room</a>
+            <a href="{% url 'items_index' %}" class="nav-link">Items</a>
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+            <span class="nav-user">Welcome, {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="nav-link" style="background: none; border: none; cursor: pointer;">Logout</button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+            <a href="{% url 'signup' %}" class="nav-link">Sign Up</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
       {% endif %}
-    </nav>
-    <hr>
-    
-    {% block content %}
-    {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <footer class="main-footer">
+      <p>&copy; {% now "Y" %} Junk Drawer App</p>
+    </footer>
   </body>
 </html>
