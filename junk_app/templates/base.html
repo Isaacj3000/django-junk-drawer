@@ -1,28 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Junk Drawer App</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Junk Drawer - Organize your items by rooms">
+    <title>{% block title %}Junk Drawer{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block head %}{% endblock %}
   </head>
   <body>
-    <nav>
-      <a href="{% url 'rooms_index' %}">Rooms</a> |
-      <a href="{% url 'rooms_new' %}">Add Room</a> |
-      {% if user.is_authenticated %}
-        Logged in as {{ user.username }} |
-        <a href="{% url 'logout' %}">Logout</a>
-      {% else %}
-        <a href="{% url 'login' %}">Login</a>
+    <header>
+      <nav class="main-nav">
+        <div class="nav-brand">
+          <a href="{% url 'home' %}">Junk Drawer</a>
+        </div>
+        <div class="nav-links">
+          <a href="{% url 'rooms_index' %}" class="nav-link">Rooms</a>
+          <a href="{% url 'items_index' %}" class="nav-link">Items</a>
+          {% if user.is_authenticated %}
+            <span class="nav-user">Welcome, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
       {% endif %}
-    </nav>
-    <hr>
-    
-    {% block content %}
-    {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <footer class="main-footer">
+      <p>&copy; {% now "Y" %} Junk Drawer App</p>
+    </footer>
   </body>
 </html>
