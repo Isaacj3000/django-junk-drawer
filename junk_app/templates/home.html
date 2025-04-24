@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h1>Welcome to the Junk Drawer App</h1>
+    <p>Keep your home organized by creating rooms and tracking the random stuff in each one.</p>
+
+    {% if user.is_authenticated %}
+      <div class="actions">
+        <a href="{% url 'rooms_index' %}" class="btn btn-primary">View My Rooms</a>
+        <a href="{% url 'rooms_new' %}" class="btn btn-secondary">Add a New Room</a>
+      </div>
+    {% else %}
+      <div class="actions">
+        <div class="login-section">
+          <h2>Log In</h2>
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </form>
+          <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
