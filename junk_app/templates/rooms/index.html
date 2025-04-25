@@ -3,16 +3,27 @@
 
 {% block content %}
   <div class="container">
-    <h1>Rooms</h1>
-    <a href="{% url 'rooms_new' %}" class="btn btn-primary">Add New Room</a>
-    <ul>
+    <div class="header-section">
+      <h1>My Rooms</h1>
+      <a href="{% url 'rooms_new' %}" class="btn btn-primary">Add New Room</a>
+    </div>
+    
+    {% if rooms %}
+    <div class="rooms-grid">
       {% for room in rooms %}
-        <li>
-          <a href="{% url 'rooms_detail' room.id %}">{{ room.name }}</a>
-        </li>
-      {% empty %}
-        <li>No rooms found. Add one above!</li>
+      <div class="room-card">
+        <h2>{{ room.name }}</h2>
+        <div class="room-actions">
+          <a href="{% url 'rooms_detail' room.id %}" class="btn btn-secondary">View Details</a>
+        </div>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <p>No rooms found. Start by adding a new room!</p>
+      <a href="{% url 'rooms_new' %}" class="btn btn-primary">Add Your First Room</a>
+    </div>
+    {% endif %}
   </div>
 {% endblock %}

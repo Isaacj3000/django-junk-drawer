@@ -4,9 +4,12 @@
 {% block content %}
   <div class="container">
     <h1>Add New Room</h1>
-    <form method="POST">
+    <form method="POST" action="{% url 'rooms_create' %}">
       {% csrf_token %}
-      {{ form.as_p }}
+      <div class="form-group">
+        <label for="name">Room Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
       <button type="submit" class="btn btn-primary">Create Room</button>
       <a href="{% url 'rooms_index' %}" class="btn btn-secondary">Cancel</a>
     </form>

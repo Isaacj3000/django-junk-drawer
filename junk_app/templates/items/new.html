@@ -9,28 +9,23 @@
         <h1>Create a New Item</h1>
     </div>
     <div class="form-section">
-        <form action="" method="post" class="item-form">
+        <form action="{% url 'items_create' %}" method="post" class="item-form">
             {% csrf_token %}
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                {{ form.name.label_tag }}
+                {{ form.name }}
             </div>
             <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="4"></textarea>
+                {{ form.description.label_tag }}
+                {{ form.description }}
             </div>
             <div class="form-group">
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" value="1">
+                {{ form.quantity.label_tag }}
+                {{ form.quantity }}
             </div>
             <div class="form-group">
-                <label for="room">Room:</label>
-                <select id="room" name="room">
-                    <option value="">-- Select a Room --</option>
-                    {% for room in rooms %}
-                    <option value="{{ room.id }}">{{ room.name }}</option>
-                    {% endfor %}
-                </select>
+                {{ form.room.label_tag }}
+                {{ form.room }}
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Create Item</button>
