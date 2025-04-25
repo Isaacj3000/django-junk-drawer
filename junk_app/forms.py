@@ -7,6 +7,9 @@ class RoomForm(forms.ModelForm):
     class Meta:
         model = Room
         fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'})
+        }
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)

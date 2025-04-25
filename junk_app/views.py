@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm, UserProfileForm, ItemForm
+from .forms import UserRegistrationForm, UserProfileForm, ItemForm, RoomForm
 from .models import Room, Item, UserProfile
 
 
@@ -42,20 +42,23 @@ def rooms_create(request):
 @login_required
 def rooms_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id, user=request.user)
-    return render(request, 'rooms/show.html', {'room': room})
+    items = Item.objects.filter(room=room, user=request.user)
+    return render(request, 'rooms/show.html', {'room': room, 'items': items})
 
 @login_required
 def rooms_edit(request, room_id):
     room = get_object_or_404(Room, id=room_id, user=request.user)
-    return render(request, 'rooms/edit.html', {'room': room})
+    form = RoomForm(instance=room)
+    return render(request, 'rooms/edit.html', {'room': room, 'form': form})
 
 @login_required
 def rooms_update(request, room_id):
     room = get_object_or_404(Room, id=room_id, user=request.user)
     if request.method == 'POST':
-        room.name = request.POST.get('name')
-        room.save()
-        return redirect('rooms_detail', room_id=room.id)
+        form = RoomForm(request.POST, instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('rooms_detail', room_id=room.id)
     return redirect('rooms_index')
 
 @login_required
@@ -84,12 +87,13 @@ def items_index(request):
 
 @login_required
 def items_new(request):
-    return render(request, 'items/new.html')
+    form = ItemForm(request.user)
+    return render(request, 'items/new.html', {'form': form})
 
 @login_required
 def items_create(request):
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.user, request.POST)
         if form.is_valid():
             item = form.save(commit=False)
             item.user = request.user
@@ -105,13 +109,14 @@ def items_detail(request, item_id):
 @login_required
 def items_edit(request, item_id):
     item = get_object_or_404(Item, id=item_id, user=request.user)
-    return render(request, 'items/edit.html', {'item': item})
+    form = ItemForm(request.user, instance=item)
+    return render(request, 'items/edit.html', {'item': item, 'form': form})
 
 @login_required
 def items_update(request, item_id):
     item = get_object_or_404(Item, id=item_id, user=request.user)
     if request.method == 'POST':
-        form = ItemForm(request.POST, instance=item)
+        form = ItemForm(request.user, request.POST, instance=item)
         if form.is_valid():
             form.save()
             return redirect('items_detail', item_id=item.id)
